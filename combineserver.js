@@ -27,6 +27,7 @@ function combineFiles(pathnames, callback) {
 }
 
 function main(argv) {
+    //首先读取配置，要合并的文件根路径，和启动服务器的端口
     var config = JSON.parse(fs.readFileSync(argv[0], 'utf-8')),
         root = config.root || '.',
         port = config.port || 80;
@@ -47,10 +48,11 @@ function main(argv) {
         });
     }).listen(port);
 }
-
+//处理url中要合并的文件，和mime
 function parseURL(root, url) {
     var base, pathnames, parts;
-
+    console.log("root:",root);
+    console.log("url:",url);
     if (url.indexOf('??') === -1) {
         url = url.replace('/', '/??');
     }
