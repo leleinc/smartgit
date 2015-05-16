@@ -47,6 +47,11 @@ function main(argv) {
                 }
             });
         }).listen(port);
+        process.on('SIGTERM', function() {
+            server.close(function() {
+                process.exit(0);
+            });
+        });
     }
     //处理url中要合并的文件，和mime
 function parseURL(root, url) {
